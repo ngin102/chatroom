@@ -1,0 +1,24 @@
+{% extends 'navbar.html' %}
+
+{% block title %} {{ chatroom.roomName }} | {% endblock %}
+
+{% block content %}
+{% if not request.user.is_authenticated %}
+<div class = "min-h-screen flex justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <div class = "max-w-lg w-full space-y-8">
+        <div>
+            <h1 class="text-center font-extrabold text-gray-900">You are not signed in.</h1>
+        </div>
+    </div>
+</div>
+{% else %}
+<div class = "min-h-screen flex justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <div class = "max-w-lg w-full space-y-8">
+        <div>
+            <h1 class="text-center text-4xl font-extrabold text-gray-900">{{chatroom.roomName}}</h1>
+        </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+{% endblock %}

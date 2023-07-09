@@ -1,0 +1,47 @@
+{% extends 'navbar.html' %}
+
+{% block title %} Select a Chatroom. | {% endblock %}
+
+{% block content %}
+{% if not request.user.is_authenticated %}
+<div class = "min-h-screen flex justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <div class = "max-w-lg w-full space-y-8">
+        <div>
+            <h1 class="text-center font-extrabold text-gray-900">You are not signed in.</h1>
+        </div>
+    </div>
+</div>
+{% else %}
+<div class = "min-h-screen flex justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <div class = "max-w-lg w-full space-y-8">
+        <div>
+            <h1 class="text-center text-4xl font-extrabold text-gray-900">Select a Chatroom.</h1>
+        </div>
+
+        <div style="overflow-y: scroll; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+            <table style="width: 100%; border-collapse: collapse;">
+              <thead>
+                <tr>
+                  <th style="padding: 8px; background-color: #f2f2f2;">Room Name</th>
+                  <th style="padding: 8px; background-color: #f2f2f2;"></th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for chatroom in chatrooms %}
+                  <tr>
+                    <td style="padding: 8px; border: 1px solid #ddd; text-align: center;">{{ chatroom.roomName }}</td>
+                    <td style="padding: 8px; border: 1px solid #ddd; text-align: center;">
+                        <button class = "justify-center px-3 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-800">
+                            <span class = "font-extrabold"> <a href = "{% url 'chatroom' chatroom.slug %}" </a> Join</span>
+                        </button>
+                    </td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+        </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+{% endblock %}
