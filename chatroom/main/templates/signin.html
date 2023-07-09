@@ -1,0 +1,52 @@
+{% extends 'navbar.html' %}
+
+{% block title %} Sign In | {% endblock %}
+
+{% block content %}
+{% if request.user.is_authenticated %}
+<div class = "min-h-screen flex justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <div class = "max-w-lg w-full space-y-8">
+        <div>
+            <h1 class="text-center font-extrabold text-gray-900">You are already signed in.</h1>
+        </div>
+    </div>
+</div>
+{% else %}
+<div class = "min-h-screen flex justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <div class = "max-w-lg w-full space-y-8">
+        <div>
+            <h1 class="text-center text-4xl font-extrabold text-gray-900">Sign In</h1>
+        </div>
+        
+        <form class = "mt-8 space-y-6" method = "post">
+            {% csrf_token %}
+            <div class="rounded-md shadow-sm -space-y-px">
+                <div>
+                    <input type = "text" name = "username" placeholder = "Username" class =" appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-900 focus:border-blue-900 focus:z-10 sm:text-sm">
+                    {% if form.username.errors %}
+                        <div class="text-red-700 text-xs">{{ form.username.errors|join:", " }}</div>
+                    {% endif %}
+                </div>
+                <div>
+                    <input type = "password" name = "password" placeholder = "Password" class = "appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-900 focus:border-blue-900 focus:z-10 sm:text-sm">
+                    {% if form.password.errors %}
+                        <div class="text-red-700 text-xs">{{ form.password.errors|join:", " }}</div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div>
+                <button class = "group relative w-full flex justify-center px-3 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-800">
+                    <span class = "font-extrabold text-3l"> Sign In </span>
+                </button>
+            </div>
+        </form>
+
+        <div class="flex justify-center">
+            <a class="text-gray px-1 py-1 rounded-md" href="/signup">Don't have an account? Sign Up.</a>
+        </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+{% endblock %}
