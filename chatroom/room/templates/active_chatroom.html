@@ -1,6 +1,6 @@
 {% extends 'navbar.html' %}
 
-{% block title %} {{ chatroom.roomName }} | {% endblock %}
+{% block title %} {{ chatroom.roomName }} Chatroom | {% endblock %}
 
 {% block content %}
 {% if not request.user.is_authenticated %}
@@ -12,13 +12,84 @@
     </div>
 </div>
 {% else %}
-<div class = "min-h-screen flex justify-center py-12 px-4 sm:px-6 lg:px-8">
+<div class = "flex justify-center py-6 px-4 sm:px-6 lg:px-8">
     <div class = "max-w-lg w-full space-y-8">
         <div>
-            <h1 class="text-center text-4xl font-extrabold text-gray-900">{{chatroom.roomName}}</h1>
+            <h1 class = "text-center text-4xl font-extrabold text-gray-900">{{chatroom.roomName}}</h1>
+        </div>
+
+        <div id = "chatMessages" class = "flex flex-col gap-4 h-[560px] overflow-y-auto">
         </div>
     </div>
-  </div>
 </div>
+
+<div class = "flex justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <div class = "bg-gray-200 rounded-xl p-3">
+      <form method = "post" action = "." class = "flex">
+        <input type = "text" name = "content" class = "flex-1 rounded-md px-3 py-2 mr-3 focus:outline-none focus:ring focus:border-blue-900" placeholder = "Write your message..." id = "messageInput">
+        <button id = "messageSubmit" class = "bg-blue-800 text-white px-4 py-2 rounded-md">Send</button>
+      </form>
+    </div>
+</div>
+
 {% endif %}
+{% endblock %}
+
+{% block scripts %}
+{{ chatroom.slug|json_script:"json-roomname"}}
+{{ request.user.username|json_script:"json-username"}}
+
+<script>
+    const roomName = JSON.parse(document.getElementById('json-roomname').textContent)
+    const userName = JSON.parse(document.getElementById('json-username').textContent)
+    const chatSocket = new WebSocket(
+        'ws://'
+        + window.location.host
+        + '/ws/'
+        + roomName
+        + '/'
+    )
+
+    chatSocket.onmessage = function(e) 
+    {
+        console.log('onmessage')
+
+        const data = JSON.parse(e.data);
+
+        if (data.message) {
+            let html = '<div class = "bg-gray-200 p-4 rounded-lg">';
+            html += '<div>';
+            html += '<div class = "text-sm font-bold text-blue-900">J' + data.username + '</div>';
+            html += '<div class = "mt-1 font-medium text-sm text-gray-900">' + data.message + '</div>';
+            html += '</div>';
+            html += '</div>';
+
+            document.querySelector('#chatMessages').innerHTML += html;
+        } else {
+            alert('The message was empty.')
+        }
+    }
+
+    chatSocket.onclose = function(e)
+    {
+        console.log('onclose')
+    }
+
+    document.querySelector('#messageSubmit').onclick = function(e) {
+        e.preventDefault();
+
+        const inputtedMessage = document.querySelector('#messageInput');
+        const message = inputtedMessage.value;
+
+        chatSocket.send(JSON.stringify({
+            'roomname': roomName,
+            'username': userName,
+            'message': message
+        }))
+        
+        inputtedMessage.value = '';
+        
+        return false;
+    }
+</script>
 {% endblock %}
