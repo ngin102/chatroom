@@ -1,6 +1,9 @@
 # Chatroom
 A chatroom web application built using Django and Tailwind CSS.
 
+To run the application, make sure to change the directory to the "chatroom" subfolder that is found inside the parent "chatroom" folder before running "python manage.py runserver". 
+
+
 ## Sign Up
 <img width="1420" alt="Sign Up Page" src="https://github.com/ngin102/chatroom/assets/71230219/f474b850-d414-4399-965e-84d7699c41d7">
 
