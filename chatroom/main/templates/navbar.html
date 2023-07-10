@@ -9,18 +9,18 @@
         <title>{% block title %}{% endblock %}Chatroom.</title>
     </head>
     <body>
-        <nav class="bg-blue-900">
-          <div class="container mx-auto sm:px-12">
-            <div class="flex items-center justify-between px-4 h-16">
-              <div class="flex items-center">
-                <a class="text-white text-3xl font-extrabold" href="#">Chatroom.</a>
+        <nav class = "bg-blue-900">
+          <div class = "container mx-auto sm:px-12">
+            <div class = "flex items-center justify-between px-4 h-16">
+              <div class = "flex items-center">
+                <span class = "text-white text-3xl font-extrabold">Chatroom.</a>
               </div>
-              <div class="flex items-center">
+              <div class = "flex items-center">
                 {% if request.user.is_authenticated %}
-                  <a class="text-gray-300 hover:text-white px-1.5 py-1 rounded-md" href="/chatrooms">Select a Chatroom</a>
-                  <a class="text-gray-300 hover:text-white px-1.5 py-1 rounded-md" href="/signout">Sign Out</a>
+                  <a class = "text-gray-300 hover:text-white px-1.5 py-1 rounded-md" href = "/chatrooms">Select a Chatroom</a>
+                  <a class = "text-gray-300 hover:text-white px-1.5 py-1 rounded-md" href = "/signout">Sign Out</a>
                 {% else %}
-                  <a class="text-gray-300 hover:text-white px-1.5 py-1 rounded-md" href="/signin">Sign In</a>
+                  <a class = "text-gray-300 hover:text-white px-1.5 py-1 rounded-md" href = "/signin">Sign In</a>
                 {% endif %}
               </div>
             </div>
