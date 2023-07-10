@@ -11,7 +11,7 @@ A chatroom web application built using Django and Tailwind CSS.
 <img width="1420" alt="Select a Chatroom Page" src="https://github.com/ngin102/chatroom/assets/71230219/a78689f0-5061-4539-a9ec-568eca42ca98">
 
 ## Join and Chat in a Chatroom
-<img width="1420" alt="Chat in a Chatroom Page" src="https://github.com/ngin102/chatroom/assets/71230219/8b3981b7-51f6-48d4-b031-6f3535533016">
+<img width="1420" alt="Chat in a Chatroom Page" src="https://github.com/ngin102/chatroom/assets/71230219/4bf4eabb-9bf3-4aed-8245-15672ffc4c60">
 
 ## Resources
 This project was completed under the guidance of [this tutorial](https://www.youtube.com/watch?v=SF1k_Twr9cg)!
