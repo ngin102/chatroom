@@ -3,9 +3,6 @@ from django.shortcuts import render, redirect
 
 from .forms import SignUpForm
 
-def mainpage(request):
-    return render(request, 'mainpage.html')
-
 def signup(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
@@ -13,7 +10,7 @@ def signup(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
-            return redirect('mainpage')
+            return redirect('chatrooms')
     else:
         form = SignUpForm()
 
