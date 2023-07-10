@@ -24,7 +24,7 @@
                         <div>
                             <div class = "flex justify-between items-center">
                                 <div class = "text-sm font-bold text-blue-900">{{message.userName}}</div>
-                                <div class = "text-xs font-medium text-gray-900">{{message.dateWritten}}</div>
+                                <div class = "text-xs font-medium text-gray-900">{{message.dateWritten}} (EDT)</div>
                             </div>
                               
                             <div class = "mt-1 font-medium text-sm text-gray-900"> {{message.messageContent}} </div>
@@ -71,7 +71,7 @@
         if (data.message) {
             setTimeout(function() {
                 location.reload();
-              }, 800);
+              }, 300);
 
             var chatMessages = document.getElementById('chatMessages');
             chatMessages.scrollTop = chatMessages.scrollHeight;
