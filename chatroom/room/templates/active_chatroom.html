@@ -24,7 +24,7 @@
                         <div>
                             <div class = "flex justify-between items-center">
                                 <div class = "text-sm font-bold text-blue-900">{{message.userName}}</div>
-                                <div class = "text-xs font-medium text-gray-900">{{message.dateWritten}} (BST)</div>
+                                <div class = "text-xs font-medium text-gray-900">{{message.dateWritten}}</div>
                             </div>
                               
                             <div class = "mt-1 font-medium text-sm text-gray-900"> {{message.messageContent}} </div>
@@ -69,14 +69,13 @@
         const data = JSON.parse(e.data);
 
         if (data.message) {
-            let html = '<div class = "bg-gray-200 p-4 rounded-lg">';
-            html += '<div>';
-            html += '<div class = "text-sm font-bold text-blue-900">' + data.username + '</div>';
-            html += '<div class = "mt-1 font-medium text-sm text-gray-900">' + data.message + '</div>';
-            html += '</div>';
-            html += '</div>';
+            setTimeout(function() {
+                location.reload();
+              }, 800);
 
-            document.querySelector('#chatMessages').innerHTML += html;
+            var chatMessages = document.getElementById('chatMessages');
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+
         } else {
             alert('The message was empty.')
         }
@@ -103,5 +102,6 @@
         
         return false;
     }
+
 </script>
 {% endblock %}
