@@ -22,7 +22,11 @@
                 {% for message in messages %}
                     <div class = "bg-gray-200 p-4 rounded-lg">
                         <div>
-                            <div class = "text-sm font-bold text-blue-900"> {{message.userName}} </div>
+                            <div class = "flex justify-between items-center">
+                                <div class = "text-sm font-bold text-blue-900">{{message.userName}}</div>
+                                <div class = "text-xs font-medium text-gray-900">{{message.dateWritten}} (BST)</div>
+                            </div>
+                              
                             <div class = "mt-1 font-medium text-sm text-gray-900"> {{message.messageContent}} </div>
                         </div>
                     </div>
@@ -36,7 +40,7 @@
         <div class = "bg-gray-200 rounded-xl p-3">
         <form method = "post" action = "." class = "flex">
             <input type = "text" name = "content" class = "flex-1 rounded-md px-3 py-2 mr-3 focus:outline-none focus:ring focus:border-blue-900" placeholder = "Write your message..." id = "messageInput">
-            <button id = "messageSubmit" class = "bg-blue-800 text-white px-4 py-2 rounded-md">Send</button>
+            <button id = "messageSubmit" class = "bg-blue-800 font-extrabold text-white px-4 py-2 rounded-md">Send</button>
         </form>
         </div>
     </div>
