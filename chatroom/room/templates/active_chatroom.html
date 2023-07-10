@@ -52,6 +52,11 @@
 {{ request.user.username|json_script:"json-username"}}
 
 <script>
+    window.onload = function() {
+        var chatMessages = document.getElementById('chatMessages');
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    };
+
     const roomName = JSON.parse(document.getElementById('json-roomname').textContent)
     const userName = JSON.parse(document.getElementById('json-username').textContent)
     const chatSocket = new WebSocket(
@@ -71,14 +76,10 @@
         if (data.message) {
             setTimeout(function() {
                 location.reload();
-              }, 300);
-
-            var chatMessages = document.getElementById('chatMessages');
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-
+            }, 300);
         } else {
             alert('The message was empty.')
-        }
+        } 
     }
 
     chatSocket.onclose = function(e)
